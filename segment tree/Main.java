@@ -2,6 +2,7 @@
  * 线段树 HDU 3308
  * 
  * 自底向上的JAVA实现
+ * https://blog.csdn.net/Yaokai_AssultMaster/article/details/79599809
  */
 
 import java.io.*;

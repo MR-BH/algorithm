@@ -3,8 +3,8 @@
  * 二叉树后序遍历
  * 
  * https://blog.csdn.net/xiaolewennofollow/article/details/50896881
- * https://blog.csdn.net/sysuwzl/article/details/7540316?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
- * https://blog.csdn.net/zhongkeli/article/details/8786694?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
+ * https://blog.csdn.net/sysuwzl/article/details/7540316
+ * https://blog.csdn.net/zhongkeli/article/details/8786694
  */
 
 function mergeSort(arr) {
