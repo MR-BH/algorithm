@@ -19,23 +19,25 @@
  * @param {Node} root
  * @return {Node}
  */
-// var connect = function(root) {
-//   if (root == null) return null;
+// 层次遍历
+var connect = function(root) {
+  if (root == null) return null;
 
-//   const queue = [];
-//   queue.push(root);
-//   while (queue.length > 0) {
-//     const length = queue.length;
-//     for (let i = 0; i < length; i++) {
-//       const element = queue.shift();
-//       if (element.left != null) queue.push(element.left);
-//       if (element.right != null) queue.push(element.right);
-//       if (i < length - 1) element.next = queue[0];
-//     }
-//   }
-//   return root;
-// };
+  const queue = [];
+  queue.push(root);
+  while (queue.length > 0) {
+    const length = queue.length;
+    for (let i = 0; i < length; i++) {
+      const element = queue.shift();
+      if (element.left != null) queue.push(element.left);
+      if (element.right != null) queue.push(element.right);
+      if (i < length - 1) element.next = queue[0];
+    }
+  }
+  return root;
+};
 
+// 利用已有next指针
 let last = null, nextStart = null;
 
 const handle = (p) => {
