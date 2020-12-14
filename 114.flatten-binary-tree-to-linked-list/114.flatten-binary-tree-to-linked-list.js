@@ -35,5 +35,43 @@ var flatten = function (root) {
   }
   p.right = right;
 };
+
+
+var flatten = function (root) {
+  if (root == null) return;
+  const stack = [ root ];
+  let prev = null;
+  while (stack.length > 0) {
+    const cur = stack.pop();
+    if (prev != null) {
+      prev.right = cur;
+      prev.left = null;
+    }
+    if (cur.right != null) stack.push(cur.right);
+    if (cur.left != null) stack.push(cur.left);
+    prev = cur;
+  }
+};
+
+var flatten = function (root) {
+  if (root == null) return;
+  let cur = root, precursor = null;
+  while (cur != null) {
+    precursor = cur.left;
+    if (precursor != null) {
+      while (precursor.right != null) {
+        precursor = precursor.right;
+      }
+      precursor.right = cur.right;
+      cur.right = cur.left;
+      cur.left = null;
+    }
+    cur = cur.right
+  }
+};
 // @lc code=end
 
+
+// @after-stub-for-debug-begin
+module.exports = flatten;
+// @after-stub-for-debug-end
