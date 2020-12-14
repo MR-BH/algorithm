@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode id=144 lang=javascript
+ * @lc app=leetcode id=94 lang=javascript
  *
- * [144] Binary Tree Preorder Traversal
+ * [94] Binary Tree Inorder Traversal
  */
 
 // @lc code=start
@@ -18,40 +18,39 @@
  * @return {number[]}
  */
 // recursive
-var preorderTraversal = function (root) {
+var inorderTraversal = function (root) {
   const nums = [];
-  preorder(root, nums);
+  inorder(root, nums);
   return nums;
 };
 
-var preorder = function (root, nums) {
-  if (root == null) return;
+var inorder = function (root, nums) {
+  if (root == null) return null;
+  inorder(root.left, nums);
   nums.push(root.val);
-  preorderTravvelsalUtil(root.left, nums);
-  preorderTravvelsalUtil(root.right, nums);
+  inorder(root.right, nums);
 }
 
 // iterative
-var preorderTraversal = function (root) {
+var inorderTraversal = function (root) {
   const nums = [];
   if (root == null) return nums;
   const stack = [];
   let tree = root;
   while (tree != null || stack.length > 0) {
     while (tree != null) {
-      // 前
-      nums.push(tree.val);
       stack.push(tree);
       tree = tree.left;
     }
     tree = stack.pop();
+    // inorder
+    nums.push(tree.val);
     tree = tree.right;
   }
   return nums;
-};
+}
 
-// morris
-var preorderTraversal = function (root) {
+var inorderTraversal = function (root) {
   const nums = [];
   if (root == null) return nums;
   let cur = root, precursor = null;
@@ -62,25 +61,17 @@ var preorderTraversal = function (root) {
         precursor = precursor.right;
       }
       if (precursor.right == null) {
-        // all root node
-        nums.push(cur.val);
         precursor.right = cur;
         cur = cur.left;
         continue;
       } 
       precursor.right = null;
-    } else {
-      // all leaf node
-      nums.push(cur.val);
     }
+    nums.push(cur.val);
     cur = cur.right;
   }
   return nums;
-};
+}
 
 // @lc code=end
 
-
-// @after-stub-for-debug-begin
-module.exports = preorderTraversal;
-// @after-stub-for-debug-end
