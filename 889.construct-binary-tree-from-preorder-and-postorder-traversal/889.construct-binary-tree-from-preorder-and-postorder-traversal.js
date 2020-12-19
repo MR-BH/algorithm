@@ -19,9 +19,9 @@
  * @return {TreeNode}
  */
 // iterative
-var constructFromPrePost = function(pre, post) {
+var constructFromPrePost = function (pre, post) {
   const root = new TreeNode(pre[0]);
-  const stack = [ root ];
+  const stack = [root];
   let index = 0;
   for (let i = 1; i < pre.length; i++) {
     let top = stack[stack.length - 1];
@@ -43,23 +43,44 @@ var constructFromPrePost = function(pre, post) {
   return root;
 };
 
-// var constructFromPrePost = function(pre, post) {
-//   const preLen = pre.length;
-//   const postLen = post.length;
-//   const map = {};
-//   for (let i = 0; i < postLen; i++) {
-//     map[post[i]] = i;
-//   }
-//   return buildTree(pre, 0, preLen - 1, map, 0, postLen - 1);
-// };
+var constructFromPrePost = function (pre, post) {
+  const preLen = pre.length;
+  const postLen = post.length;
+  const map = {};
+  for (let i = 0; i < postLen; i++) {
+    map[post[i]] = i;
+  }
+  return buildTree(pre, 0, preLen - 1, map, 0, postLen - 1);
+};
 
-// var buildTree = function(pre, preLeft, preRight, map, postLeft, postRight) {
-//   if (preLeft > preRight || postLeft > postRight) return null;
-//   const root = new TreeNode(pre[preLeft++]);
-//   const index = map[pre[preLeft]];
-//   root.left = buildTree(pre, preLeft, index - postLeft + preLeft, map, postLeft, index);
-//   root.right = buildTree(pre, index - postLeft + preLeft + 1, preRight, map, index + 1, postRight - 1); 
-//   return root;
-// }
+var buildTree = function (pre, preLeft, preRight, map, postLeft, postRight) {
+  if (preLeft > preRight || postLeft > postRight) return null;
+  const root = new TreeNode(pre[preLeft]);
+  if (preLeft === preRight) {
+    return root;
+  }
+  const index = map[pre[++preLeft]];
+  root.left = buildTree(pre, preLeft, index - postLeft + preLeft, map, postLeft, index);
+  root.right = buildTree(pre, index - postLeft + preLeft + 1, preRight, map, index + 1, postRight - 1);
+  return root;
+}
+
+var constructFromPrePost = function (pre, post) {
+  let preIndex = 0, postIndex = 0;
+  const build = function (stop) {
+    if (post[postIndex] != stop && preIndex < pre.length) {
+      const root = new TreeNode(pre[preIndex++]);
+      root.left = build(root.val);
+      root.right = build(root.val);
+      postIndex++;
+      return root;
+    }
+    return null;
+  }
+  return build();
+};
+
 // @lc code=end
-
+// @after-stub-for-debug-begin
+module.exports = constructFromPrePost;
+// @after-stub-for-debug-end
